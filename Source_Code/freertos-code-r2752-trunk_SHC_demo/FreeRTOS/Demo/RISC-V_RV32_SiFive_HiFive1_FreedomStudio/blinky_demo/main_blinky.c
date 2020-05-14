@@ -216,29 +216,6 @@ BaseType_t xReturned;
 	process_message(s_msg, sizeof(s_msg)); // process buffer
 	configASSERT( esp32_ret == AT_OK );  // exit if disconnect to wifi
 
-
-//	/* Connect to AWS */
-//	memset(s_msg, 0, sizeof(s_msg)); // clear buffer
-//	esp32_recv(0,0); // clear esp32 queue message
-//	esp32_send_cmd("AT+CIPSTART=\"TCP\",\"hifivedemo.s3-ap-southeast-1.amazonaws.com\",80,2\r\n", 1200); // connect to AWS
-//	esp32_recv(s_msg, sizeof(s_msg)); // get esp32 queue message and store to buffer
-//	esp32_ret = AT_ERROR;  s_is_connect = AT_DISCONNECT;  // reset esp32 return
-//	process_message(s_msg, sizeof(s_msg)); // process buffer
-//	configASSERT( s_is_connect == AT_CONNECT );
-//
-//	esp32_send_cmd("AT+CIPSEND=76\r\n", 100);
-//	memset(s_msg, 0, sizeof(s_msg));
-//	esp32_recv(0,0); // clear esp32 queue message
-//	esp32_send_cmd("GET /data.txt HTTP/1.1\r\nHost: hifivedemo.s3-ap-southeast-1.amazonaws.com\r\n\r\n", 2000);
-//
-//	esp32_recv(s_msg, sizeof(s_msg)); // get esp32 queue message
-//	process_message(s_msg, sizeof(s_msg));
-//
-//	esp32_send_cmd("AT+CIPCLOSE\r\n", 100);
-//
-//	led_ctrl(s_led_buf);
-//	vTaskDelay( ( TickType_t )1000 / portTICK_PERIOD_MS ); //delay ms
-
 	for( ;; )
 	{
 		/* Test case here */
@@ -440,11 +417,11 @@ static void test0(void)
 static void test1(void)
 {
 	memset(s_msg, 0, sizeof(s_msg));
-	esp32_send_cmd("AT+CIPSTART=\"TCP\",\"hifivedemo.s3-ap-southeast-1.amazonaws.com\",80,2\r\n", 5000);
+	esp32_send_cmd("AT+CIPSTART=\"TCP\",\"hifive-1-demo.s3-ap-southeast-1.amazonaws.com\",80,2\r\n", 5000);
 
-	esp32_send_cmd("AT+CIPSEND=76\r\n", 100);
+	esp32_send_cmd("AT+CIPSEND=79\r\n", 100);
 	esp32_recv(0,0); // clear queue
-	esp32_send_cmd("GET /data.txt HTTP/1.1\r\nHost: hifivedemo.s3-ap-southeast-1.amazonaws.com\r\n\r\n", 2000);
+	esp32_send_cmd("GET /data.txt HTTP/1.1\r\nHost: hifive-1-demo.s3-ap-southeast-1.amazonaws.com\r\n\r\n", 2000);
 
 	esp32_recv(s_msg, sizeof(s_msg)); // get esp32 msg
 	process_message(s_msg, sizeof(s_msg));
@@ -462,7 +439,7 @@ static void test2(void)
 		/* Connect to AWS-S3 */
 		memset(s_msg, 0, sizeof(s_msg)); // clear buffer
 		esp32_recv(0,0); // clear esp32 queue message
-		esp32_send_cmd("AT+CIPSTART=\"TCP\",\"hifivedemo.s3-ap-southeast-1.amazonaws.com\",80,2\r\n", 1200); // connect to AWS
+		esp32_send_cmd("AT+CIPSTART=\"TCP\",\"hifive-1-demo.s3-ap-southeast-1.amazonaws.com\",80,2\r\n", 1200); // connect to AWS
 		esp32_recv(s_msg, sizeof(s_msg)); // get esp32 queue message and store to buffer
 		esp32_ret = AT_ERROR;  s_is_connect = AT_DISCONNECT;  // reset esp32 return
 		process_message(s_msg, sizeof(s_msg)); // process buffer
@@ -479,7 +456,7 @@ static void test2(void)
 		/* GET AWS-S3 data */
 		memset(s_msg, 0, sizeof(s_msg)); // clear buffer
 		esp32_recv(0,0); // clear queue
-		esp32_send_cmd("AT+CIPSEND=76\r\n", 100);
+		esp32_send_cmd("AT+CIPSEND=79\r\n", 100);
 		esp32_recv(s_msg, sizeof(s_msg)); // get esp32 queue message and store to buffer
 		esp32_ret = AT_ERROR; // reset esp32 return
 		process_message(s_msg, sizeof(s_msg)); // process buffer
@@ -487,7 +464,7 @@ static void test2(void)
 		if(esp32_ret == AT_OK) {
 			memset(s_msg, 0, sizeof(s_msg)); // clear buffer
 			esp32_recv(0,0); // clear queue
-			esp32_send_cmd("GET /data.txt HTTP/1.1\r\nHost: hifivedemo.s3-ap-southeast-1.amazonaws.com\r\n\r\n", 1500);
+			esp32_send_cmd("GET /data.txt HTTP/1.1\r\nHost: hifive-1-demo.s3-ap-southeast-1.amazonaws.com\r\n\r\n", 1500);
 			esp32_recv(s_msg, sizeof(s_msg)); // get esp32 queue message and store to buffer
 			esp32_ret = AT_ERROR; // reset esp32 return
 			process_message(s_msg, sizeof(s_msg)); // process buffer
