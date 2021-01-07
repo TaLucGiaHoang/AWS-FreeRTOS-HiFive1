@@ -94,7 +94,7 @@ static void prvSpiRxTask( void *pvParameters )
 	int ret = 0;
 	memset(s, 0, sizeof(messageReceive));
 	xSemaphoreTake(xSemaphore, portMAX_DELAY);
-	debug_puts("Start ");debug_puts(__func__);debug_puts("\n");
+	//debug_puts("Start ");debug_puts(__func__);debug_puts("\r\n");
 	xSemaphoreGive(xSemaphore);
 	for( ;; )
 	{
@@ -149,7 +149,7 @@ static void prvESP32Task(void* pvParameters)
 	( void ) pvParameters;
 	struct ESP32_ST esp32;
 	xSemaphoreTake(xSemaphore, portMAX_DELAY);
-	debug_puts("Start ");debug_puts(__func__);debug_puts("\n");
+	//debug_puts("Start ");debug_puts(__func__);debug_puts("\r\n");
 	xSemaphoreGive(xSemaphore);
 	for(;;)
 	{

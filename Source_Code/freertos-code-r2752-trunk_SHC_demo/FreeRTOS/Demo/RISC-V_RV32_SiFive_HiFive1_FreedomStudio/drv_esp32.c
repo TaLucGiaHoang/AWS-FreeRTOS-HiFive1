@@ -19,7 +19,7 @@
 
 void drv_esp32_init(void)
 {
-	drr_esp32_init();
+	driver_spi1_init();
 }
 
 int drv_esp32_send(const char* cmd)
